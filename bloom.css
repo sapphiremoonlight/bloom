@@ -91,6 +91,7 @@ header h1 {
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  gap: 10px;
 }
 
 .nav-btn {
@@ -455,4 +456,5 @@ body.dark {
   --card-bg: #1d1d1d;
   --card-border: #333;
   --shadow: none;
+
 }
