@@ -5,123 +5,151 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bloom Cycle Circle</title>
 <style>
-  :root {
-    --period: #fb87ac;
-    --fertile: #ffdbe6;
-    --luteal: #f7a1b0;
-    --text: #333;
-    --muted: #777;
-    --accent: #fc77a1;
-    --bg: #fff;
-  }
+:root {
+  --period: #fb87ac;
+  --fertile: #ffdbe6;
+  --luteal: #f7a1b0;
+  --text: #333;
+  --muted: #777;
+  --accent: #fc77a1;
+  --frame: #fc77a1;
+  --bg: #fff0f6;
+}
 
-  body {
-    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-    background: var(--bg);
-    color: var(--text);
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+body {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.cycle-main {
+    display: flex;                /* makes it a flex container */
+    flex-direction: column;       /* stack h1, circle, button vertically */
+    justify-content: center;      /* vertical centering */
+    align-items: center;          /* horizontal centering */
+    min-height: 100vh;            /* take full viewport height */
     padding: 20px;
-  }
+    box-sizing: border-box;
+}
 
-  h1 {
-    margin: 0 0 10px 0;
-    font-size: 2rem;
-    text-align: center;
-  }
+/* CYCLE CIRCLE */
+.cycle-circle {
+  width: 80vw;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  margin: 20px 0;
+  border: 6px double var(--frame);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff0f6, #ffe3ed);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
 
-  .cycle-circle {
-    width: 320px;
-    height: 320px;
-    position: relative;
-    margin: 20px 0;
-  }
+svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
-  svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-  }
-
-  .cycle-info {
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin-top: 10px;
-  }
-
-  circle.day {
+circle.day {
   cursor: pointer;
   transition: stroke 0.2s ease, stroke-width 0.2s ease;
   stroke: transparent;
-  stroke-width: 4; /* will expand on hover */
+  stroke-width: 4;
 }
 
 circle.day:hover {
-  stroke: #fc77a1; /* highlight color */
-  stroke-width: 8;  /* visually larger, but original circle size stays same */
+  stroke: var(--accent);
+  stroke-width: 8;
 }
 
-  .nav-btn {
-    display: inline-block;
-    padding: 6px 14px;
-    background: var(--accent);
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: background 0.2s, transform 0.1s;
-    margin-top: 10px;
-  }
+.cycle-info {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--muted);
+  position: absolute;
+  text-align: center;
+  pointer-events: none; /* prevents blocking clicks on dots */
+}
 
-  .nav-btn:hover {
-    background: var(--luteal);
-  }
+.cycle-info .phase {
+  font-weight: bold;
+  color: var(--accent);
+  font-size: 1.1rem;
+}
 
-  @media(max-width: 400px) {
-    .cycle-circle {
-      width: 260px;
-      height: 260px;
-    }
-    h1 { font-size: 1.6rem; }
-  }
+.nav-btn {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 10px;
+}
+
+.nav-btn:hover {
+  background: var(--luteal);
+}
+
+@media(max-width: 400px) {
+  h1 { font-size: 1.6rem; }
+}
 </style>
 </head>
 <body>
-
+<main class="cycle-main">
 <h1>Bloom Cycle Circle</h1>
 
 <div class="cycle-circle">
   <svg></svg>
-</div>
-
-<div class="cycle-info">
-  <p id="cycle-day-info">Tap a day to see details</p>
+  <div class="cycle-info" id="cycle-day-info">
+    Tap a day to see details
+  </div>
 </div>
 
 <a href="index.html" class="nav-btn">Back to Tracker</a>
+</main>
 
 <script>
-  // --- SYNC CONFIG ---
-  // Ideally, these values come from a shared JS file or from Neon DB
-  // Example for now: same as your index.html
-  const cycleData = {
-    cycleLength: 28,
-    periodLength: 5,
-    fertileLength: 6,
-    lutealLength: 17,
-    startDate: new Date("2025-12-13")
-  };
+const cycleData = {
+  cycleLength: 28,
+  periodLength: 5,
+  fertileLength: 6,
+  lutealLength: 17,
+  startDate: new Date("2025-12-13")
+};
 
-  const svg = document.querySelector("svg");
-  const info = document.getElementById("cycle-day-info");
-  const center = 160; // half svg width
-  const radius = 120;
+const svg = document.querySelector("svg");
+const info = document.getElementById("cycle-day-info");
+const container = document.querySelector(".cycle-circle");
 
-  // clear any existing children (if page reloads)
-  svg.innerHTML = '';
+function drawCircle() {
+  const size = container.clientWidth;
+  const center = size / 2;
+  const radius = size * 0.38; // padding for dots
+  const dotRadius = size * 0.044;
+
+  svg.innerHTML = ''; // clear previous dots
 
   for (let i = 0; i < cycleData.cycleLength; i++) {
     const angle = (360 / cycleData.cycleLength) * i;
@@ -132,25 +160,31 @@ circle.day:hover {
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("cx", x);
     circle.setAttribute("cy", y);
-    circle.setAttribute("r", 14);
+    circle.setAttribute("r", dotRadius);
     circle.setAttribute("class", "day");
 
-    // Assign color based on phase
     if (i < cycleData.periodLength) circle.setAttribute("fill", "var(--period)");
     else if (i < cycleData.periodLength + cycleData.fertileLength) circle.setAttribute("fill", "var(--fertile)");
     else circle.setAttribute("fill", "var(--luteal)");
 
-    // click handler
     circle.addEventListener("click", () => {
       const date = new Date(cycleData.startDate);
       date.setDate(date.getDate() + i);
       const phase = i < cycleData.periodLength ? "Period" :
                     i < cycleData.periodLength + cycleData.fertileLength ? "Fertile" : "Luteal";
-      info.textContent = `${date.toDateString()} — ${phase}`;
+      info.innerHTML = `<span class="phase">${phase}</span><br>${date.toDateString()}`;
     });
 
     svg.appendChild(circle);
   }
+}
+
+// draw initially
+drawCircle();
+
+// redraw on window resize
+window.addEventListener("resize", drawCircle);
 </script>
+
 </body>
 </html>
