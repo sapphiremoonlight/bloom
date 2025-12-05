@@ -1,0 +1,458 @@
+/* ------------------------------------
+   ROOT THEME
+------------------------------------ */
+:root {
+  --bg: #fff;
+  --text: #333;
+  --muted: #777;
+
+  --accent: #fc77a1ff;
+  --accent-2: #ffb7cc;
+
+--period: linear-gradient(90deg, #fb87acff, #ffb7cc);
+  --fertile: #ffdbe6;
+  --luteal: #f7a1b0ff;
+  --noteOnly: #1e90ff;
+
+  --card-bg: #ffffff;
+  --card-border: #ffe3ed;
+  --shadow: 0 2px 4px rgba(0,0,0,0.06);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --pad: 14px;
+  --pad-sm: 8px;
+
+  --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+}
+
+/* ------------------------------------
+   GLOBAL
+------------------------------------ */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+h1, h2, h3, h4 { margin: 0; }
+small, .small { font-size: 12px; color: var(--muted); }
+
+/* Layout container */
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ------------------------------------
+   HEADER
+------------------------------------ */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;   
+  gap: 2px;          
+}
+
+.logo-img {
+  width: 160px;              
+  height: auto;
+  display: block;
+}
+
+header h1 {
+   margin: 0;
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 1.2;     
+}
+
+.lead {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 250px;
+  margin-top: 2px;    
+}
+
+.nav-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.nav-btn:hover {
+  background: var(--accent-2);
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------
+   DESKTOP LAYOUT
+------------------------------------ */
+@media (min-width: 600px) {
+  header {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .logo-container {
+    flex-direction: row;   /* logo + text side by side */
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-img {
+    width: 150px;          /* desktop size */
+  }
+
+  header h1 {
+    text-align: left;
+    font-size: 2rem;
+  }
+
+  .lead {
+    text-align: left;
+    max-width: 400px;      /* wider on desktop */
+  }
+
+  .nav-btn-container {
+    width: auto;
+    margin-top: 0;
+  }
+}
+
+/* ------------------------------------
+   GRID LAYOUT
+------------------------------------ */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+}
+
+@media (max-width: 880px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------
+   CARD STYLES
+------------------------------------ */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: var(--pad);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.miniCard {
+  padding: var(--pad-sm);
+  background: linear-gradient(180deg, #fff, #fff7fa);
+}
+
+/* ------------------------------------
+   BUTTONS
+------------------------------------ */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+.big-btn {
+  background: var(--accent);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+.mini-btn {
+  background: white;
+  border: 1px solid var(--card-border);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.sub-btn {
+  background: white;
+  border: 1px solid var(--card-border);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.sub-btn.danger {
+  color: #b33;
+  border-color: #ffccd7;
+}
+
+/* ------------------------------------
+   MODAL
+------------------------------------ */
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalBox {
+  background: white;
+  border-radius: var(--radius);
+  padding: 16px;
+  max-width: 400px;
+  width: 90%;
+}
+
+/* ------------------------------------
+   INPUTS
+------------------------------------ */
+
+select, textarea {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid #eec7d3;
+  padding: 6px;
+  font-family: inherit;
+  background: white;
+}
+
+textarea {
+  height: 70px;
+  resize: vertical;
+}
+
+/* ------------------------------------
+   MAIN CARD SPECIFICS
+------------------------------------ */
+.todayBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todayHuman {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.todayActions {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.notesBlock {
+  margin-top: 12px;
+}
+
+.actionRow {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------
+   PREDICTION CARD
+------------------------------------ */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.predictedDate,
+.confidenceValue {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* ------------------------------------
+   SIDEBAR – CALENDAR
+------------------------------------ */
+.calendarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendarNav button {
+  background: white;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  margin-left: 4px;
+}
+
+.weekdayRow {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.calendar {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.noteOnly {
+  background-color: var(--noteOnly);
+  color: white;
+}
+
+/* CALENDAR CELLS */
+.day {
+  padding: 10px 0;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  position: relative;
+  cursor: pointer; /* important for clickability */
+  min-height: 50px; /* ensures enough space to click */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transition: background 0.2s;
+}
+
+.day:hover {
+  background: #f9f9f9;
+}
+
+.day.today {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  font-weight: bold;
+}
+
+/* Full shading blocks */
+.day.period {
+  background: var(--period);
+  color: #fff;
+}
+
+.day.fertile {
+  background: var(--fertile);
+}
+
+.day.luteal {
+  background: var(--luteal);
+}
+
+.dayHeader {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5; /* ensures some height */
+  min-height: 20px;
+}
+
+
+/* ------------------------------------
+   LEGEND
+------------------------------------ */
+.legend {
+  margin-top: 14px;
+}
+
+.legend .item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.pill {
+  width: 18px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.pill.period { background: var(--accent); }
+.pill.fertile { background: var(--fertile); }
+.pill.luteal { background: var(--luteal); }
+
+/* ------------------------------------
+   QUICK STATS
+------------------------------------ */
+.quickStats {
+  margin-top: 8px;
+}
+
+.quickButtons {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+/* ------------------------------------
+   FOOTER
+------------------------------------ */
+footer {
+  text-align: center;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ------------------------------------
+   OPTIONAL: DARK MODE SUPPORT
+------------------------------------ */
+/* Add class .dark to body if you want to toggle later */
+body.dark {
+  --bg: #111;
+  --text: #f0f0f0;
+  --muted: #aaa;
+  --card-bg: #1d1d1d;
+  --card-border: #333;
+  --shadow: none;
+}

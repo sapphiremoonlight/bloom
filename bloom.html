@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bloom</title>
+  <meta name="description" content="Bloom with your cycle. Track your period and luteal phase, reflect on your days, and nurture your well-being." />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="bloom.css">
+</head>
+
+<body>
+  <div class="app">
+    <!-- HEADER -->
+  <header>
+  <h1>
+    <img src="bloom.png" alt="Bloom logo" class="logo-img">
+  </h1>
+
+  <p class="lead">
+    Private, local-only. Designed for PMDD forethought — highlights luteal risk days.
+  </p>
+</header>
+
+
+    <!-- MAIN GRID -->
+    <main class="grid">
+      <!-- MAIN CARD -->
+      <section class="card" id="mainCard">
+
+        <div class="todayBar">
+          <div>
+            <div class="small">Today</div>
+            <div id="todayHuman" class="todayHuman"></div>
+          </div>
+
+          <div class="todayActions">
+            <button class="big-btn" id="logStartBtn">Log period start</button>
+            <button id="logEndBtn" class="mini-btn">Log period end</button>
+          </div>
+        </div>
+
+        <!-- DAILY INPUT CONTROLS -->
+        <div class="inputRow">
+
+          <div class="card miniCard">
+            <label class="small" for="flowSel">Flow</label>
+            <select id="flowSel">
+              <option value="">-- not set --</option>
+              <option value="none">None</option>
+              <option value="spotting">Spotting</option>
+              <option value="light">Light</option>
+              <option value="medium">Medium</option>
+              <option value="heavy">Heavy</option>
+              <option value="flooding">Flooding</option>
+            </select>
+          </div>
+
+          <div class="card miniCard">
+            <label class="small" for="appetiteSel">Appetite</label>
+            <select id="appetiteSel">
+              <option value="">--</option>
+              <option value="very_low">Very low</option>
+              <option value="low">Low</option>
+              <option value="normal">Normal</option>
+              <option value="more">More</option>
+              <option value="ravenous">Ravenous</option>
+              <option value="sugar_cravings">Sugar cravings</option>
+              <option value="salt_cravings">Salt cravings</option>
+            </select>
+          </div>
+
+          <div class="card miniCard">
+            <label class="small" for="moodSel">Mood</label>
+            <select id="moodSel">
+              <option value="">--</option>
+              <option value="neutral">Neutral</option>
+              <option value="happy">Happy</option>
+              <option value="calm">Calm</option>
+              <option value="energized">Energized</option>
+              <option value="anxious">Anxious</option>
+              <option value="irritable">Irritable</option>
+              <option value="sad">Sad / Crying</option>
+              <option value="overwhelmed">Overwhelmed</option>
+              <option value="low_self_esteem">Low self-esteem</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- NOTES -->
+        <div class="notesBlock">
+          <label for="notes">Notes (private)</label>
+          <textarea id="notes" placeholder="cramps, social stuff, meds..."></textarea>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="actionRow">
+          <button class="big-btn" id="saveEntry">Save entry for today</button>
+          <button class="sub-btn" id="showHistory">History / Export</button>
+          <button class="sub-btn" id="installGuides">Install guide</button>
+        </div>
+
+        <!-- PREDICTION CARD -->
+        <div class="stats card" id="predictCard">
+          <div class="statsLeft">
+            <div class="small">Prediction</div>
+            <div id="predictedStart" class="predictedDate"></div>
+            <div class="small">
+              Ovulation est. <span id="ovulationEst"></span> ·
+              Luteal risk window: <span id="lutealWindow"></span>
+            </div>
+          </div>
+
+          <div class="statsRight">
+            <div class="small">Confidence</div>
+            <div id="confidence" class="confidenceValue"></div>
+            <div class="small" id="completedCyclesInfo"></div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside>
+
+        <!-- CALENDAR BLOCK -->
+        <div class="card">
+          <div class="calendarHeader">
+            <div>
+              <strong id="monthLabel"></strong>
+              <div class="small" id="yearLabel"></div>
+            </div>
+
+            <div class="calendarNav small">
+              <button id="prevMonth" type="button">‹</button>
+              <button id="nextMonth" type="button">›</button>
+            </div>
+          </div>
+
+          <!-- WEEKDAYS -->
+          <div class="weekdayRow">
+            <div>Sun</div><div>Mon</div><div>Tue</div>
+            <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+          </div>
+
+          <div id="calendar" class="calendar"></div>
+
+          <!-- LEGEND -->
+          <div class="legend">
+            <div class="item">
+              <div class="pill period"></div> Period
+            </div>
+            <div class="item">
+              <div class="pill fertile"></div> Fertile
+            </div>
+            <div class="item">
+              <div class="pill luteal"></div> Luteal risk
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK STATS -->
+        <div class="card statsCard">
+          <div class="small">Quick stats</div>
+          <div class="quickStats">
+            <div>Average cycle: <strong id="avgCycle">—</strong> days</div>
+            <div>Average period length: <strong id="avgPeriod">—</strong> days</div>
+            <div>Last start: <strong id="lastStart">—</strong></div>
+          </div>
+
+          <div class="quickButtons">
+            <button id="exportCSV" class="sub-btn" type="button">Export CSV</button>
+            <button id="exportJSON" class="sub-btn" type="button">Export JSON</button>
+            <button id="importJSON" class="sub-btn" type="button">Import JSON</button>
+            <button id="clearData" class="sub-btn danger" type="button">Clear data</button>
+          </div>
+        </div>
+      </aside>
+
+<div class="nav-btn-container">
+    <a href="https://sapphiremoonlight.github.io/saturn-rising/index.html" class="nav-btn">
+      Journal
+    </a>
+  </div>
+
+    </main>
+
+  <footer>
+    🌸 Bloom quietly grows with you. 🌿
+  </footer>
+
+  </div>
+
+  <!-- MODAL EDITOR -->
+  <div id="dayModal" class="modal">
+    <div class="modalBox">
+      <div class="modalTop">
+        <div id="modalTitle"></div>
+        <button id="closeModal" class="closeBtn" type="button">×</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- External JS -->
+  <script src="bloom.js"></script>
+</body>
+</html>

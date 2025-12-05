@@ -1,0 +1,47 @@
+{
+  "user": {
+    "avgCycle": 28,
+    "avgPeriod": 5
+  },
+  "entries": [
+    {"date": "2024-12-15", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2024-12-19", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-01-10", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-01-14", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-02-07", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-02-11", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-03-06", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-03-10", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-04-01", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-04-04", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-04-28", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-05-01", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-05-25", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-05-28", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-06-23", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-06-26", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-07-21", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-07-24", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-08-23", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-08-26", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-09-21", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-09-24", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-10-20", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-10-24", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"},
+    
+    {"date": "2025-11-19", "type": "period_start", "created_at": "2024-12-05T00:00:00Z"},
+    {"date": "2025-11-23", "type": "period_end", "created_at": "2024-12-05T00:00:00Z"}
+  ],
+  "cycles": []
+}
