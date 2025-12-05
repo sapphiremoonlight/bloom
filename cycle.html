@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bloom Cycle Circle</title>
+<style>
+  :root {
+    --period: #fb87ac;
+    --fertile: #ffdbe6;
+    --luteal: #f7a1b0;
+    --text: #333;
+    --muted: #777;
+    --accent: #fc77a1;
+    --bg: #fff;
+  }
+
+  body {
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  h1 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .cycle-circle {
+    width: 320px;
+    height: 320px;
+    position: relative;
+    margin: 20px 0;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .cycle-info {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  circle.day {
+  cursor: pointer;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+  stroke: transparent;
+  stroke-width: 4; /* will expand on hover */
+}
+
+circle.day:hover {
+  stroke: #fc77a1; /* highlight color */
+  stroke-width: 8;  /* visually larger, but original circle size stays same */
+}
+
+  .nav-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 10px;
+  }
+
+  .nav-btn:hover {
+    background: var(--luteal);
+  }
+
+  @media(max-width: 400px) {
+    .cycle-circle {
+      width: 260px;
+      height: 260px;
+    }
+    h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Bloom Cycle Circle</h1>
+
+<div class="cycle-circle">
+  <svg></svg>
+</div>
+
+<div class="cycle-info">
+  <p id="cycle-day-info">Tap a day to see details</p>
+</div>
+
+<a href="index.html" class="nav-btn">Back to Tracker</a>
+
+<script>
+  // --- SYNC CONFIG ---
+  // Ideally, these values come from a shared JS file or from Neon DB
+  // Example for now: same as your index.html
+  const cycleData = {
+    cycleLength: 28,
+    periodLength: 5,
+    fertileLength: 6,
+    lutealLength: 17,
+    startDate: new Date("2025-12-13")
+  };
+
+  const svg = document.querySelector("svg");
+  const info = document.getElementById("cycle-day-info");
+  const center = 160; // half svg width
+  const radius = 120;
+
+  // clear any existing children (if page reloads)
+  svg.innerHTML = '';
+
+  for (let i = 0; i < cycleData.cycleLength; i++) {
+    const angle = (360 / cycleData.cycleLength) * i;
+    const rad = (angle * Math.PI) / 180;
+    const x = center + radius * Math.cos(rad);
+    const y = center + radius * Math.sin(rad);
+
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", y);
+    circle.setAttribute("r", 14);
+    circle.setAttribute("class", "day");
+
+    // Assign color based on phase
+    if (i < cycleData.periodLength) circle.setAttribute("fill", "var(--period)");
+    else if (i < cycleData.periodLength + cycleData.fertileLength) circle.setAttribute("fill", "var(--fertile)");
+    else circle.setAttribute("fill", "var(--luteal)");
+
+    // click handler
+    circle.addEventListener("click", () => {
+      const date = new Date(cycleData.startDate);
+      date.setDate(date.getDate() + i);
+      const phase = i < cycleData.periodLength ? "Period" :
+                    i < cycleData.periodLength + cycleData.fertileLength ? "Fertile" : "Luteal";
+      info.textContent = `${date.toDateString()} — ${phase}`;
+    });
+
+    svg.appendChild(circle);
+  }
+</script>
+</body>
+</html>
